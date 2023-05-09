@@ -31,6 +31,7 @@ export class DropDownMapperComponent {
   argsList: string[] = [];
   previewData: any[] = [];
   previewRow: string[] = [];
+  combination: string[] = [];
   @Input() availableColumns: any[] = [];
 
   constructor(private _mapperService: MapperService) {}
@@ -67,20 +68,30 @@ export class DropDownMapperComponent {
       defaultValue: ourFieldDetails?.defaultValue,
       transform: [],
       dataType: ourFieldDetails?.dataType,
+      combination: this.yourField,
     };
+    this.combination = this.yourField;
     this.mappings.push(mappedFields);
     this.previewData.push({
       field: this.ourField,
-      value:
-        this.previewRow[
-          this.headerRow.findIndex((a) => a == this.yourField[0])
-        ],
+      value: this.getPreviewData(),
     });
   }
 
   closePopup() {
     this.displayStyle = 'none';
+    this.displayStyleCombine = 'none';
   }
+
+  editCombinations(mapping: MappedFields, index: number) {
+    this.editMapping = JSON.parse(JSON.stringify(mapping));
+    this.editMapping!['index'] = index;
+    this.editMapping!['activeField'] = this.editMapping?.yourField[0];
+    this.transform = this.editMapping?.transform || [];
+    this.displayStyleCombine = 'block';
+    this.combination = this.editMapping?.combination || [];
+  }
+
   editMappings(mapping: MappedFields, index: number, field: string) {
     this.editMapping = JSON.parse(JSON.stringify(mapping));
     this.editMapping!['index'] = index;
@@ -91,6 +102,29 @@ export class DropDownMapperComponent {
 
   filterTransformations(value: any): any[] {
     return value.filter((v: any) => v.field == this.editMapping?.activeField);
+  }
+  filterCombinations(value: any): any[] {
+    return value?.filter(
+      (v: any) => this.combination.findIndex((a) => a == v) == -1
+    );
+  }
+
+  deleteCombination(index: number) {
+    this.combination.splice(index, 1);
+    this.mappings[this.editMapping?.index!].combination = JSON.parse(
+      JSON.stringify(this.combination)
+    );
+    this.previewData[this.editMapping?.index!].value = this.getPreviewData();
+
+  }
+
+  addCombination() {
+    this.combination.push(this.editMapping?.activeField!);
+    this.mappings[this.editMapping?.index!].combination = JSON.parse(
+      JSON.stringify(this.combination)
+    );
+    this.previewData[this.editMapping?.index!].value = this.getPreviewData();
+
   }
 
   setArgsList() {
@@ -123,7 +157,7 @@ export class DropDownMapperComponent {
       this.editMapping?.activeField!
     );
     console.log(transformedValue);
-    this.previewData[this.editMapping?.index!].value = transformedValue;
+    this.previewData[this.editMapping?.index!].value = this.getPreviewData();
     this.mappings[this.editMapping?.index!].transform = JSON.parse(
       JSON.stringify(this.transform)
     );
@@ -143,20 +177,35 @@ export class DropDownMapperComponent {
     let transformedValue = this.applyTranformationOnField(
       this.editMapping?.activeField!
     );
-    this.previewData[this.editMapping?.index!].value = transformedValue;
+    this.previewData[this.editMapping?.index!].value = this.getPreviewData();
     this.mappings[this.editMapping?.index!].transform = JSON.parse(
       JSON.stringify(this.transform)
     );
   }
 
+  getPreviewData() {
+    let output = '';
+    this.combination.forEach((c) => {
+      let t = this.transform
+        .filter((a) => a.field == c)
+        .sort((a, b) => b.stepNum - a.stepNum);
+      if (t.length > 0) output += t[0].output;
+      else {
+        let i = this.headerRow.findIndex((a) => a == c.trim());
+        if (i != -1) output += this.previewRow[i];
+      }
+      console.log(output);
+    });
+    return output;
+  }
+
   applyTranformationOnField(field: string) {
     let previousOutput: any =
       this.previewRow[this.headerRow.findIndex((a) => a == field)];
-    console.log('prev', previousOutput, field);
     for (var i = 0; i < this.transform.length; i++) {
       if (this.transform[i].field != field) continue;
       let newArgsList = this.transform[i].args.map((val, key) => {
-        let i = this.headerRow.findIndex((a) => a == val);
+        let i = this.headerRow.findIndex((a) => a == val.trim());
         if (i == -1) return val;
         else return this.previewRow[i];
       });

@@ -6,6 +6,7 @@ export type MappedFields = {
   index?: number | null;
   activeField?: string | null;
   transform: Transform[];
+  combination: string[]
 };
 
 export type Transform = {

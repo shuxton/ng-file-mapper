@@ -75,7 +75,12 @@
           </td>
           <td>{{ i.dataType }}</td>
           <td>
-            <button class="btn btn-sm btn-warning">Combine</button>
+            <button
+              class="btn btn-sm btn-warning"
+              (click)="editCombinations(i, num)"
+            >
+              Combine
+            </button>
           </td>
         </tr>
       </tbody>
@@ -111,7 +116,7 @@
       <div class="modal-body row">
         <div class="col-md-4 d-flex" style="flex-direction: column">
           <label>Selected Field</label>
-          <input [ngModel]="editMapping?.activeField" disabled>
+          <input [ngModel]="editMapping?.activeField" disabled />
         </div>
         <div class="col-md-3 d-flex" style="flex-direction: column">
           <label>Operations</label>
@@ -141,9 +146,14 @@
               <th>Delete</th>
             </thead>
             <tbody>
-              <tr *ngFor="let i of  filterTransformations(transform); let num = index">
+              <tr
+                *ngFor="
+                  let i of filterTransformations(transform);
+                  let num = index
+                "
+              >
                 <td>{{ num }}</td>
-                <td>{{i.output}}</td>
+                <td>{{ i.output }}</td>
                 <td><button (click)="deleteTransform(num)">Delete</button></td>
               </tr>
             </tbody>
@@ -159,8 +169,6 @@
   </div>
 </div>
 
-
-
 <div
   class="modal"
   tabindex="-1"
@@ -171,46 +179,37 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">
-          Edit Mapping for {{ editMapping?.ourField }}
+          Edit Combination for {{ editMapping?.ourField }}
         </h4>
       </div>
       <div class="modal-body row">
-        <div class="col-md-4 d-flex" style="flex-direction: column">
-          <label>Selected Field</label>
-          <input [ngModel]="editMapping?.activeField" disabled>
-        </div>
-        <div class="col-md-3 d-flex" style="flex-direction: column">
-          <label>Operations</label>
-          <select [(ngModel)]="selectedOperation" (change)="setArgsList()">
-            <option *ngFor="let o of operations" value="{{ o.name }}">
-              {{ o.name }}
+        <div class="col-md-6 d-flex" style="flex-direction: column">
+          <label>Selected Field in an order</label>
+          <select [ngModel]="editMapping?.activeField">
+            <option
+              *ngFor="let i of filterCombinations(editMapping?.yourField); let num = index"
+            >
+              {{ i }}
             </option>
           </select>
         </div>
-        <div class="col-md-3 d-flex" style="flex-direction: column">
-          <label *ngIf="argsList.length > 0">Arguments</label>
-          <input
-            *ngFor="let a of argsList; let num = index"
-            [(ngModel)]="argsList[num]"
-          />
-        </div>
         <div class="col-md-2 d-flex" style="flex-direction: column">
-          <button class="btn btn-sm btn-warning" (click)="applyTransform()">
-            Apply
+          <button class="btn btn-sm btn-warning" (click)="addCombination()">
+            Add
           </button>
         </div>
         <div class="col-md-12">
           <table>
             <thead>
-              <th>Step Number</th>
-              <th>Output</th>
+              <th>Position</th>
+              <th>Field</th>
               <th>Delete</th>
             </thead>
             <tbody>
-              <tr *ngFor="let i of  filterTransformations(transform); let num = index">
+              <tr *ngFor="let i of combination; let num = index">
                 <td>{{ num }}</td>
-                <td>{{i.output}}</td>
-                <td><button (click)="deleteTransform(num)">Delete</button></td>
+                <td>{{ i }}</td>
+                <td><button (click)="deleteCombination(num)">Delete</button></td>
               </tr>
             </tbody>
           </table>
