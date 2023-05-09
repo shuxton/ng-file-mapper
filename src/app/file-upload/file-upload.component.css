@@ -1,0 +1,7 @@
+#fu-container > * {
+    margin: 5px 0;
+}
+
+.error{
+    font-size: small;
+}

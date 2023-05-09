@@ -1,0 +1,8 @@
+<div id="fu-container" class="form">
+  <label class="form-label"> Upload XLS/CSV </label>
+  <input class="form-control" type="file" (change)="onFileSelected($event)" />
+  <button class="btn btn-success" (click)="uploadFile()">Submit</button>
+  <div class="error" *ngIf="error">
+    <span class="text-danger">No headers found! Please check the file</span>
+  </div>
+</div>
