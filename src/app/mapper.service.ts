@@ -30,7 +30,7 @@ export class MapperService {
   }
 
   addMappedData(mappedData: MappedFields[]) {
-    this.mappedData.next(mappedData);
+    this.mappedData.next(JSON.parse(JSON.stringify(mappedData)));
   }
-
+ 
 }

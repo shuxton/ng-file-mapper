@@ -8,6 +8,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DropDownMapperComponent } from './drop-down-mapper/drop-down-mapper.component';
 import { DragMapperComponent } from './drag-mapper/drag-mapper.component';
 import { FormsModule } from '@angular/forms';
+import { DropDownMapperModule } from './drop-down-mapper/drop-down-mapper.module';
 
 
 @NgModule({
@@ -15,13 +16,13 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     FileMapperComponent,
     FileUploadComponent,
-    DropDownMapperComponent,
     DragMapperComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    DropDownMapperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

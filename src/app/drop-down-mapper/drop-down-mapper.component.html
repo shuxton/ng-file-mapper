@@ -1,110 +1,24 @@
 <div class="form">
-  <div class="col-md-2">
-    <label class="form-label">Create Mapping for</label>
-    <select class="form-select" [(ngModel)]="selectedColumnConfig">
-      <option
-        *ngFor="let i of availableColumns; let num = index"
-        value="{{ num }}"
-      >
-        {{ i.name }}
-      </option>
-    </select>
-  </div>
+  <drop-down-mapper-columns
+    [availableColumns]="availableColumns"
+    [headerRow]="headerRow"
+    [previewRow]="previewRow"
+    [yourField]="yourField"
+    [ourField]="ourField"
+  ></drop-down-mapper-columns>
   <div class="row">
-    <div
-      class="col-md-5 d-flex justify-content-center align-items-center"
-      style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
-    >
-      <label class="form-label">Your fields</label>
-      <select multiple class="form-select" [(ngModel)]="yourField">
-        <option *ngFor="let i of headerRow" value="{{ i }}">
-          {{ i }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-2 d-flex justify-content-center align-items-center">
-      <br />
-      <button
-        class="btn btn-primary"
-        style="margin-top: 7px"
-        (click)="mapFields()"
-      >
-        Map
-      </button>
-    </div>
-    <div
-      class="col-md-5 d-flex justify-content-center align-items-center"
-      style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
-    >
-      <label class="form-label">Our fields</label>
-      <select class="form-select" [(ngModel)]="ourField">
-        <option
-          *ngFor="let i of availableColumns[selectedColumnConfig]?.columns"
-          value="{{ i.name }}"
-        >
-          {{ i.name }} ({{ i.dataType }})
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <table class="table table-striped">
-      <thead>
-        <th>Our Field</th>
-        <th>Your Field</th>
-        <th>Default Value</th>
-        <th>Data Type</th>
-        <th>Combinations</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i of mappings; let num = index">
-          <td>{{ i.ourField }}</td>
-          <td>
-            <ul>
-              <li *ngFor="let j of i.yourField">
-                {{ j }}
-                <i
-                  class="bi bi-pencil-fill"
-                  (click)="editMappings(i, num, j)"
-                ></i>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <input type="text" [(ngModel)]="i.defaultValue" />
-          </td>
-          <td>{{ i.dataType }}</td>
-          <td>
-            <button
-              class="btn btn-sm btn-warning"
-              (click)="editCombinations(i, num)"
-            >
-              Combine
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th *ngFor="let i of previewData">
-            {{ i.field }}
-          </th>
-        </tr>
-        <tr>
-          <td *ngFor="let i of previewData">
-            {{ i.value }}
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+    <mapping-table
+      [headerRow]="headerRow"
+      [previewRow]="previewRow"
+    ></mapping-table>
     <br />
-    <div class="col-md-2">
+    <!-- <div class="col-md-2">
       <button class="btn btn-sm btn-success" (click)="viewMappings()">View Mapping</button>
-    </div>
+    </div> -->
   </div>
 </div>
 
-<div
+<!-- <div
   class="modal"
   tabindex="-1"
   role="dialog"
@@ -131,133 +45,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{ display: displayStyle }"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">
-          Edit Mapping for {{ editMapping?.ourField }}
-        </h4>
-      </div>
-      <div class="modal-body row">
-        <div class="col-md-4 d-flex" style="flex-direction: column">
-          <label>Selected Field</label>
-          <input [ngModel]="editMapping?.activeField" disabled />
-        </div>
-        <div class="col-md-3 d-flex" style="flex-direction: column">
-          <label>Operations</label>
-          <select [(ngModel)]="selectedOperation" (change)="setArgsList()">
-            <option *ngFor="let o of operations" value="{{ o.name }}">
-              {{ o.name }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md-3 d-flex" style="flex-direction: column">
-          <label *ngIf="argsList.length > 0">Arguments</label>
-          <input
-            *ngFor="let a of argsList; let num = index"
-            [(ngModel)]="argsList[num]"
-          />
-        </div>
-        <div class="col-md-2 d-flex" style="flex-direction: column">
-          <button class="btn btn-sm btn-warning" (click)="applyTransform()">
-            Apply
-          </button>
-        </div>
-        <div class="col-md-12">
-          <table>
-            <thead>
-              <th>Step Number</th>
-              <th>Output</th>
-              <th>Delete</th>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="
-                  let i of filterTransformations(transform);
-                  let num = index
-                "
-              >
-                <td>{{ num }}</td>
-                <td>{{ i.output }}</td>
-                <td><button (click)="deleteTransform(num)">Delete</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closePopup()">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{ display: displayStyleCombine }"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">
-          Edit Combination for {{ editMapping?.ourField }}
-        </h4>
-      </div>
-      <div class="modal-body row">
-        <div class="col-md-6 d-flex" style="flex-direction: column">
-          <label>Selected Field in an order</label>
-          <select [ngModel]="editMapping?.activeField">
-            <option
-              *ngFor="
-                let i of filterCombinations(editMapping?.yourField);
-                let num = index
-              "
-            >
-              {{ i }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md-2 d-flex" style="flex-direction: column">
-          <button class="btn btn-sm btn-warning" (click)="addCombination()">
-            Add
-          </button>
-        </div>
-        <div class="col-md-12">
-          <table>
-            <thead>
-              <th>Position</th>
-              <th>Field</th>
-              <th>Delete</th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let i of combination; let num = index">
-                <td>{{ num }}</td>
-                <td>{{ i }}</td>
-                <td>
-                  <button (click)="deleteCombination(num)">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closePopup()">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+</div> -->

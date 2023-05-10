@@ -1,0 +1,50 @@
+  <div class="col-md-2">
+    <label class="form-label">Create Mapping for</label>
+    <select class="form-select" [(ngModel)]="selectedColumnConfig">
+      <option
+        *ngFor="let i of availableColumns; let num = index"
+        value="{{ num }}"
+      >
+        {{ i.name }}
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    <div
+      class="col-md-5 d-flex justify-content-center align-items-center"
+      style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
+    >
+      <label class="form-label">Your fields</label>
+      <select multiple class="form-select" [(ngModel)]="yourField">
+        <option *ngFor="let i of headerRow" value="{{ i }}">
+          {{ i }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-2 d-flex justify-content-center align-items-center">
+      <br />
+      <button
+        class="btn btn-primary"
+        style="margin-top: 7px"
+        (click)="mapFields()"
+      >
+        Map
+      </button>
+    </div>
+    <div
+      class="col-md-5 d-flex justify-content-center align-items-center"
+      style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
+    >
+      <label class="form-label">Our fields</label>
+      <select class="form-select" [(ngModel)]="ourField">
+        <option
+          *ngFor="let i of availableColumns[selectedColumnConfig]?.columns"
+          value="{{ i.name }}"
+        >
+          {{ i.name }} ({{ i.dataType }})
+        </option>
+      </select>
+    </div>
+  </div>
+
+

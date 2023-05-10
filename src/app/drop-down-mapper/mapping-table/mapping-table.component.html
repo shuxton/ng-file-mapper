@@ -1,0 +1,61 @@
+<table class="table table-striped">
+  <thead>
+    <th>Our Field</th>
+    <th>Your Field</th>
+    <th>Default Value</th>
+    <th>Data Type</th>
+    <th>Combinations</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of mappings; let num = index">
+      <td>{{ i.ourField }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let j of i.yourField">
+            {{ j }}
+            <i class="bi bi-pencil-fill" (click)="editMappings(i, num, j)"></i>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="i.defaultValue" />
+      </td>
+      <td>{{ i.dataType }}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-warning"
+          (click)="editCombinations(i, num)"
+        >
+          Combine
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th *ngFor="let i of previewData">
+        {{ i.field }}
+      </th>
+    </tr>
+    <tr>
+      <td *ngFor="let i of previewData">
+        {{ i.value }}
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+
+<edit-transformations
+  (closeEditTranformations)="closePopup()"
+  [editMapping]="editMapping"
+  [displayStyle]="displayStyle"
+  [transform]="transform"
+></edit-transformations>
+
+<edit-combinations
+  (closeEditCombinations)="closePopup()"
+  [editMapping]="editMapping"
+  [displayStyleCombination]="displayStyleCombination"
+  [combination]="combination"
+></edit-combinations>
