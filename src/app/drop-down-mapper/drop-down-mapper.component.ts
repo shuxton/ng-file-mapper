@@ -18,6 +18,8 @@ export class DropDownMapperComponent {
   transform: Transform[] = [];
   displayStyle = 'none';
   displayStyleCombine = 'none';
+  displayStyleMappings = 'none';
+  dataToView: string = '';
   operations: Operation[] = [
     { name: 'concat', args: 1 },
     { name: 'multiply', args: 1 },
@@ -42,6 +44,10 @@ export class DropDownMapperComponent {
       this.previewRow = e.previewRow;
       this.yourField = [this.headerRow[0]];
       this.ourField = this.availableColumns[0]?.columns[0]?.name;
+    });
+
+    this._mapperService.mappedData$.subscribe((e) => {
+      this.mappings = e;
     });
   }
 
@@ -81,6 +87,7 @@ export class DropDownMapperComponent {
   closePopup() {
     this.displayStyle = 'none';
     this.displayStyleCombine = 'none';
+    this.displayStyleMappings = 'none';
   }
 
   editCombinations(mapping: MappedFields, index: number) {
@@ -115,7 +122,6 @@ export class DropDownMapperComponent {
       JSON.stringify(this.combination)
     );
     this.previewData[this.editMapping?.index!].value = this.getPreviewData();
-
   }
 
   addCombination() {
@@ -124,7 +130,6 @@ export class DropDownMapperComponent {
       JSON.stringify(this.combination)
     );
     this.previewData[this.editMapping?.index!].value = this.getPreviewData();
-
   }
 
   setArgsList() {
@@ -219,4 +224,11 @@ export class DropDownMapperComponent {
 
     return previousOutput;
   }
+
+  viewMappings() {
+    this.displayStyleMappings = 'block';
+    this.dataToView = JSON.stringify(this.mappings);
+  }
+
+  downloadMappings() {}
 }

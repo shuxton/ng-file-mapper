@@ -97,6 +97,39 @@
         </tr>
       </tfoot>
     </table>
+    <br />
+    <div class="col-md-2">
+      <button class="btn btn-sm btn-success" (click)="viewMappings()">View Mapping</button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayStyleMappings }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Mapped data
+        </h4>
+      </div>
+      <div class="modal-body row">
+        <div class="card-body">
+            <p>
+                {{dataToView}}
+            </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -187,7 +220,10 @@
           <label>Selected Field in an order</label>
           <select [ngModel]="editMapping?.activeField">
             <option
-              *ngFor="let i of filterCombinations(editMapping?.yourField); let num = index"
+              *ngFor="
+                let i of filterCombinations(editMapping?.yourField);
+                let num = index
+              "
             >
               {{ i }}
             </option>
@@ -209,7 +245,9 @@
               <tr *ngFor="let i of combination; let num = index">
                 <td>{{ num }}</td>
                 <td>{{ i }}</td>
-                <td><button (click)="deleteCombination(num)">Delete</button></td>
+                <td>
+                  <button (click)="deleteCombination(num)">Delete</button>
+                </td>
               </tr>
             </tbody>
           </table>
