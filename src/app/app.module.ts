@@ -9,20 +9,20 @@ import { DropDownMapperComponent } from './drop-down-mapper/drop-down-mapper.com
 import { DragMapperComponent } from './drag-mapper/drag-mapper.component';
 import { FormsModule } from '@angular/forms';
 import { DropDownMapperModule } from './drop-down-mapper/drop-down-mapper.module';
+import { NgFileMapperComponent } from './ng-file-mapper/ng-file-mapper.component';
+import { NgFileMapperModule } from './ng-file-mapper/ng-file-mapper.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileMapperComponent,
-    FileUploadComponent,
-    DragMapperComponent
+    
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    DropDownMapperModule
+    NgFileMapperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
