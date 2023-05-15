@@ -1,3 +1,5 @@
+import { MappedFields, Row, Transform } from "../drop-down-mapper.type";
+
 export const transformOperation = (
   field: string,
   args: string[],
@@ -73,3 +75,58 @@ const substring = (field: string, args: string[]) => {
     return 'Error occured';
   }
 };
+
+
+// export const ProcessFile=(mappings:MappedFields[],rows:Row[],headerRow:string[])=>{
+//   var output:Row[]=[]
+//   rows.forEach((row,index)=>{
+//     var r:Row={cells:[]}
+//     mappings.forEach((val, i) => {
+//     val.yourField.forEach((field, index) => {
+//       applyTranformationOnField(field);
+//     });
+//     r.cells.push({
+//       field: val.ourField,
+//       value: getPreviewData(headerRow,val.transform,val.combination,row),
+//     });
+//   });
+//   output.push(r)
+// })
+// }
+
+// const getPreviewData=(headerRow:string[],transform:Transform[],combination:string[],row:Row)=>{
+//   let output = '';
+//   combination.forEach((c) => {
+//     let t = transform
+//       .filter((a) => a.field == c)
+//       .sort((a, b) => b.stepNum - a.stepNum);
+//     if (t.length > 0) output += t[0].output;
+//     else {
+//       let i = headerRow.findIndex((a) => a == c.trim());
+//       if (i != -1) output += row.cells[i].value;
+//     }
+//     console.log(output);
+//   });
+//   return output;
+// }
+
+// applyTranformationOnField(field: string) {
+//   let previousOutput: any =
+//     this.previewRow[this.headerRow.findIndex((a) => a == field)];
+//   for (var i = 0; i < this.transform.length; i++) {
+//     if (this.transform[i].field != field) continue;
+//     let newArgsList = this.transform[i].args.map((val, key) => {
+//       let i = this.headerRow.findIndex((a) => a == val.trim());
+//       if (i == -1) return val;
+//       else return this.previewRow[i];
+//     });
+//     previousOutput = transformOperation(
+//       previousOutput,
+//       newArgsList,
+//       this.transform[i].operation
+//     );
+//     this.transform[i].output = previousOutput;
+//   }
+
+//   return previousOutput;
+// }

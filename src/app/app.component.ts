@@ -23,4 +23,8 @@ export class AppComponent {
     },
   ];
   title = 'ng-file-mapper';
+
+  getMappings(event:any){
+     console.log(event)
+  }
 }

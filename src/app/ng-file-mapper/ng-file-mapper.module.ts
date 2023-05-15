@@ -6,6 +6,7 @@ import { DragMapperComponent } from '../drag-mapper/drag-mapper.component';
 import { FormsModule } from '@angular/forms';
 import { DropDownMapperModule } from '../drop-down-mapper/drop-down-mapper.module';
 import { NgFileMapperComponent } from './ng-file-mapper.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgFileMapperComponent } from './ng-file-mapper.component';
   ],
   imports: [
     FormsModule,
-    DropDownMapperModule
+    DropDownMapperModule,
+    CommonModule
   ],
   exports:[NgFileMapperComponent],
   providers: [],

@@ -21,3 +21,12 @@ export type Operation = {
   name: string;
   args: number;
 };
+
+export type Cell = {
+  field: string;
+  value: any;
+};
+
+export type Row = {
+ cells:Cell[]
+};

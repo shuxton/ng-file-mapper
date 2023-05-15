@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MappedFields } from './drop-down-mapper/drop-down-mapper.type';
 
@@ -12,6 +12,7 @@ export type ParsedData={
   providedIn: 'root'
 })
 export class MapperService {
+  @Output() output$: EventEmitter<any[]> = new EventEmitter();
 
   private parsedData = new BehaviorSubject<ParsedData>({
     headerRow:[],

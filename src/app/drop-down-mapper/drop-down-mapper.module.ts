@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ColumnsComponent } from './columns/columns.component';
 import { DropDownMapperComponent } from './drop-down-mapper.component';
 import { EditTransformationsComponent } from './edit-transformations/edit-transformations.component';
 import { EditCombinationsComponent } from './edit-combinations/edit-combinations.component';
 import { MappingTableComponent } from './mapping-table/mapping-table.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { MappingTableComponent } from './mapping-table/mapping-table.component';
     DropDownMapperComponent,
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule
   ],
   exports:[DropDownMapperComponent],

@@ -1,5 +1,8 @@
-<div class="row" *ngIf="headerRow.length>0 || true">
-    
-    <app-drop-down-mapper [availableColumns]="availableColumns"></app-drop-down-mapper>
-    
+<div class="row" *ngIf="headerRow.length > 0">
+  <app-drop-down-mapper
+    [availableColumns]="availableColumns"
+  ></app-drop-down-mapper>
+  <div class="col-md-2">
+    <button class="btn btn-sm btn-primary" (click)="generateMapping()">Generate Mapping</button>
+  </div>
 </div>
