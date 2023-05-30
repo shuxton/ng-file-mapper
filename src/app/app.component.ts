@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LabelsConfig } from './ng-file-mapper/ng-file-mapper.type';
+import { LabelsConfig } from './ng-file-mapper/ng-file-mapper';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { LabelsConfig } from './ng-file-mapper/ng-file-mapper.type';
 })
 export class AppComponent {
   labelsConfig: LabelsConfig = {
-    availableColumns:"Our fields"
+    availableColumns: 'Our fields',
   };
   availableColumns = [
     {
@@ -26,9 +26,8 @@ export class AppComponent {
       ],
     },
   ];
-  title = 'ng-file-mapper';
 
-  getMappings(event: any) {
-    console.log(event);
+  getMappings(output: any) {
+    console.log(output);
   }
 }

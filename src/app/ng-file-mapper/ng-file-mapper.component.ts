@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MapperService } from '../mapper.service';
 import { MappedFields } from '../drop-down-mapper/drop-down-mapper.type';
-import { LabelsConfig } from './ng-file-mapper.type';
+import { LabelsConfig } from './ng-file-mapper';
 
 
 @Component({

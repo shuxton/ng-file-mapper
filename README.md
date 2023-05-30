@@ -1,27 +1,117 @@
-# NgFileMapper
+# ng-file-mapper
+### _File Mapping Component for Angular_
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+## Contribute
+[https://github.com/shuxton/ng-file-mapper](https://github.com/shuxton/ng-file-mapper)
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Import a CSV/XSLX file
+- Map the fields to your model
+- Transform the mapped data
+- Combine the fields in many to one mappings
+- Export the mapped data
 
-## Code scaffolding
+## To-Do
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Develop utility functions to work with final output
+- Provide more customizable UI
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```sh
+npm i @shuxton/ng-file-mapper
+```
 
-## Running unit tests
+## Example 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Using the Component
+*.module.ts
+```
+import { NgFileMapperModule } from '@shuxton/ng-file-mapper';
 
-## Running end-to-end tests
+@NgModule({
+  ...
+  imports: [
+    ...
+    NgFileMapperModule,
+    ...
+  ]})
+```
+*.component.html
+```
+<ng-file-mapper
+  (getMappings)="getMappings($event)"
+  [availableColumns]="availableColumns"
+  [labelsConfig]="labelsConfig"
+></ng-file-mapper>
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+*.component.ts
+```
+  labelsConfig: LabelsConfig = {
+    availableColumns: 'Our fields',
+  };
+  availableColumns = [
+    {
+      name: 'Sales',
+      columns: [
+        { name: 'Invoice Number', defaultValue: null, dataType: 'string' },
+        { name: 'Issue Date', defaultValue: null, dataType: 'dateTime' },
+      ],
+    },
+    {
+      name: 'Credit',
+      columns: [
+        { name: 'Credit Note Number', defaultValue: null, dataType: 'string' },
+        { name: 'Issue Date', defaultValue: null, dataType: 'dateTime' },
+      ],
+    },
+  ];
 
-## Further help
+  getMappings(output: any) {
+    console.log(output);
+  }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Output
+```
+[
+    {
+        "uploadedFields": [
+            "Invoice Type",
+            "Invoice Number *"
+        ],
+        "fieldForMapping": "Invoice Number",
+        "defaultValue": null,
+        "transform": [
+            {
+                "field": "Invoice Number *",
+                "operation": "concat",
+                "args": [
+                    "-"
+                ],
+                "stepNum": 0,
+                "output": "20900-"
+            }
+        ],
+        "dataType": "string",
+        "combination": [
+            "Invoice Number *",
+            "Invoice Type"
+        ]
+    },
+    {
+        "uploadedFields": [
+            "Invoice Issue Date*"
+        ],
+        "fieldForMapping": "Issue Date",
+        "defaultValue": null,
+        "transform": [],
+        "dataType": "dateTime",
+        "combination": [
+            "Invoice Issue Date*"
+        ]
+    }
+]
+```

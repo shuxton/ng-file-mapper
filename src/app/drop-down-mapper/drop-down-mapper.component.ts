@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MapperService } from '../mapper.service';
-import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper.type';
+import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper';
 
 @Component({
   selector: 'app-drop-down-mapper',

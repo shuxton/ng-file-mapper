@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MapperService } from '../mapper.service';
 import * as XLSX from 'xlsx';
-import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper.type';
+import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper';
 
 @Component({
   selector: 'app-file-upload',

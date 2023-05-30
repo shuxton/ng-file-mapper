@@ -1,8 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { MapperService } from '../../mapper.service';
 import { MappedFields } from '../drop-down-mapper.type';
-import { LabelsConfig } from 'src/app/ng-file-mapper/ng-file-mapper.type';
-import {l} from '../utils/labelResolver'
+// import { LabelsConfig } from 'src/app/ng-file-mapper/ng-file-mapper';
+// import {l} from '../utils/labelResolver'
+export type LabelsConfig = {
+  availableColumns?: string;
+  uploadedColumns?:string;
+  fileUploadHeader?:string;
+};
+
+
 @Component({
   selector: 'drop-down-mapper-columns',
   templateUrl: './columns.component.html',
@@ -25,7 +32,6 @@ export class ColumnsComponent {
     this._mapperService.mappedData$.subscribe((e) => {
       this.mappings = e;
     });
-    l("hello","world")
   }
 
   handleMappedField() {

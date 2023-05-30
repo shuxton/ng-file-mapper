@@ -1,5 +1,5 @@
 {
-  "name": "@abylle/ng-file-mapper",
+  "name": "@shuxton/ng-file-mapper",
   "version": "1.0.3",
   "scripts": {
     "ng": "ng",
@@ -39,12 +39,12 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^16.0.1",
-    "typescript": "~5.0.2"
+    "typescript": "~5.0.2",
+    "xlsx": "^0.18.5"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.",
   "author": "shuxton",
   "license": "ISC",
   "dependencies": {
-    "xlsx": "^0.18.5"
   }
 }
