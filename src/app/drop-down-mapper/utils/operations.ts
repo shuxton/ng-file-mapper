@@ -82,11 +82,11 @@ const substring = (field: string, args: string[]) => {
 //   rows.forEach((row,index)=>{
 //     var r:Row={cells:[]}
 //     mappings.forEach((val, i) => {
-//     val.yourField.forEach((field, index) => {
+//     val.uploadedFields.forEach((field, index) => {
 //       applyTranformationOnField(field);
 //     });
 //     r.cells.push({
-//       field: val.ourField,
+//       field: val.fieldForMapping,
 //       value: getPreviewData(headerRow,val.transform,val.combination,row),
 //     });
 //   });

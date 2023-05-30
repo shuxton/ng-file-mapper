@@ -3,8 +3,9 @@
     [availableColumns]="availableColumns"
     [headerRow]="headerRow"
     [previewRow]="previewRow"
-    [yourField]="yourField"
-    [ourField]="ourField"
+    [uploadedFields]="uploadedFields"
+    [fieldForMapping]="fieldForMapping"
+    [labelsConfig]="labelsConfig"
   ></drop-down-mapper-columns>
   <div class="row">
     <mapping-table
@@ -12,37 +13,5 @@
       [previewRow]="previewRow"
     ></mapping-table>
     <br />
-    <!-- <div class="col-md-2">
-      <button class="btn btn-sm btn-success" (click)="viewMappings()">View Mapping</button>
-    </div> -->
   </div>
 </div>
-
-<!-- <div
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{ display: displayStyleMappings }"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">
-          Mapped data
-        </h4>
-      </div>
-      <div class="modal-body row">
-        <div class="card-body">
-            <p>
-                {{dataToView}}
-            </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closePopup()">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->

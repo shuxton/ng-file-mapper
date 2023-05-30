@@ -1,6 +1,6 @@
 export type MappedFields = {
-  ourField: string;
-  yourField: string[];
+  fieldForMapping: string;
+  uploadedFields: string[];
   defaultValue: any;
   dataType: string;
   index?: number | null;

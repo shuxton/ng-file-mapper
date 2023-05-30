@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MapperService } from '../mapper.service';
+import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper.type';
 
 @Component({
   selector: 'app-drop-down-mapper',
@@ -8,10 +9,11 @@ import { MapperService } from '../mapper.service';
 })
 export class DropDownMapperComponent {
   @Input() availableColumns: any[] = [];
+  @Input() labelsConfig:LabelsConfig={}
   headerRow:string[]=[]
   previewRow:string[]=[]
-  yourField:string[]=[]
-  ourField:string=''
+  uploadedFields:string[]=[]
+  fieldForMapping:string=''
 
   constructor(private _mapperService: MapperService) {}
 
@@ -19,8 +21,8 @@ export class DropDownMapperComponent {
     this._mapperService.parsedData$.subscribe((e) => {
       this.headerRow = e.headerRow;
       this.previewRow = e.previewRow;
-      this.yourField = [this.headerRow[0]];
-      this.ourField = this.availableColumns[0]?.columns[0]?.name;
+      this.uploadedFields = [this.headerRow[0]];
+      this.fieldForMapping = this.availableColumns[0]?.columns[0]?.name;
     });
   }
 }

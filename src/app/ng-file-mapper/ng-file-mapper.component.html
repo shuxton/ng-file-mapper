@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-file-upload ></app-file-upload>
+      <app-file-upload [labelsConfig]="labelsConfig"></app-file-upload>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <app-file-mapper [availableColumns]="availableColumns"></app-file-mapper>
+      <app-file-mapper [availableColumns]="availableColumns" [labelsConfig]="labelsConfig"></app-file-mapper>
     </div>
   </div>
 </div>

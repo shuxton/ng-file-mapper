@@ -14,8 +14,8 @@
       class="col-md-5 d-flex justify-content-center align-items-center"
       style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
     >
-      <label class="form-label">Your fields</label>
-      <select multiple class="form-select" [(ngModel)]="yourField">
+      <label class="form-label">Uploaded fields</label>
+      <select multiple class="form-select" [(ngModel)]="uploadedFields">
         <option *ngFor="let i of headerRow" value="{{ i }}">
           {{ i }}
         </option>
@@ -35,8 +35,8 @@
       class="col-md-5 d-flex justify-content-center align-items-center"
       style="padding-bottom: 5px; margin-top: 5px; flex-direction: column"
     >
-      <label class="form-label">Our fields</label>
-      <select class="form-select" [(ngModel)]="ourField">
+      <label class="form-label">Available fields</label>
+      <select class="form-select" [(ngModel)]="fieldForMapping">
         <option
           *ngFor="let i of availableColumns[selectedColumnConfig]?.columns"
           value="{{ i.name }}"

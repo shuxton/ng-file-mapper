@@ -8,10 +8,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let i of mappings; let num = index">
-      <td>{{ i.ourField }}</td>
+      <td>{{ i.fieldForMapping }}</td>
       <td>
         <ul>
-          <li *ngFor="let j of i.yourField">
+          <li *ngFor="let j of i.uploadedFields">
             {{ j }}
             <i class="bi bi-pencil-fill" (click)="editMappings(i, num, j)"></i>
           </li>

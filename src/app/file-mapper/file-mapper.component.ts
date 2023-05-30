@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MapperService } from '../mapper.service';
 import { MappedFields } from '../drop-down-mapper/drop-down-mapper.type';
+import { LabelsConfig } from '../ng-file-mapper/ng-file-mapper.type';
 
 @Component({
   selector: 'app-file-mapper',
@@ -11,6 +12,7 @@ export class FileMapperComponent {
   headerRow: string[] = [];
   mappings: MappedFields[]=[]
   @Input() availableColumns:any[]=[]
+  @Input() labelsConfig:LabelsConfig={}
 
   constructor(private _mapperService: MapperService) {}
 

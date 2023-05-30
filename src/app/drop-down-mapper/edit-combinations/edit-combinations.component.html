@@ -8,7 +8,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">
-          Edit Combination for {{ editMapping?.ourField }}
+          Edit Combination for {{ editMapping?.fieldForMapping }}
         </h4>
       </div>
       <div class="modal-body row">
@@ -17,7 +17,7 @@
           <select [ngModel]="editMapping?.activeField">
             <option
               *ngFor="
-                let i of filterCombinations(editMapping?.yourField);
+                let i of filterCombinations(editMapping?.uploadedFields);
                 let num = index
               "
             >

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MapperService } from '../../mapper.service';
 import { MappedFields, Operation, Transform } from '../drop-down-mapper.type';
-import { transformOperation } from '../operations/operations';
+import { transformOperation } from '../utils/operations';
 
 @Component({
   selector: 'mapping-table',
@@ -32,7 +32,7 @@ export class MappingTableComponent {
   editCombinations(mapping: MappedFields, index: number) {
     this.editMapping = JSON.parse(JSON.stringify(mapping));
     this.editMapping!['index'] = index;
-    this.editMapping!['activeField'] = this.editMapping?.yourField[0];
+    this.editMapping!['activeField'] = this.editMapping?.uploadedFields[0];
     this.displayStyleCombination = 'block';
     this.combination = this.editMapping?.combination || [];
   }
@@ -55,11 +55,11 @@ export class MappingTableComponent {
     this.mappings.forEach((val, i) => {
       this.combination = val.combination;
       this.transform = val.transform;
-      val.yourField.forEach((field, index) => {
+      val.uploadedFields.forEach((field, index) => {
         this.applyTranformationOnField(field);
       });
       this.previewData.push({
-        field: val.ourField,
+        field: val.fieldForMapping,
         value: this.getPreviewData(),
       });
     });
